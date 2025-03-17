@@ -13,6 +13,13 @@ public:
         this->prev = NULL;
         this->next = NULL;
     }
+    ~Node(){
+        int val = this->data;
+        if (next != NULL) {
+            next = NULL; // Avoid recursive deletion
+        }
+        cout << "Memory freed for node with data " << val << endl;
+    }
 };
 
 // Traversing a linked list
@@ -36,16 +43,28 @@ int getLength(Node* head) {
     return length;
 }
 
-void insertAtHead(Node*& head, int d) {
+void insertAtHead(Node*& tail, Node*& head, int d) {
+    // Empty list
+    if (head == NULL) {
+        Node* temp = new Node(d);
+        head = temp;
+        tail = temp;
+        return;
+    }
     Node* temp = new Node(d);
     temp->next = head;
-    if (head != NULL) {
-        head->prev = temp;
-    }
+    head->prev = temp;
     head = temp;
 }
 
-void insertAtTail(Node*& tail, int d) {
+void insertAtTail(Node*& tail, Node*& head, int d) {
+    // Empty list
+    if (tail == NULL) {
+        Node* temp = new Node(d);
+        head = temp;
+        tail = temp;
+        return;
+    }
     Node* temp = new Node(d);
     tail->next = temp;
     temp->prev = tail;
@@ -55,7 +74,7 @@ void insertAtTail(Node*& tail, int d) {
 void insertAtPosition(Node*& tail, Node*& head, int position, int d) {
     // Insert at start
     if (position == 1) {
-        insertAtHead(head, d);
+        insertAtHead(tail, head, d);
         return;
     }
 
@@ -68,7 +87,7 @@ void insertAtPosition(Node*& tail, Node*& head, int position, int d) {
     
     // Inserting at last position
     if (temp->next == NULL) {
-        insertAtTail(tail, d);
+        insertAtTail(tail, head, d);
         return;
     }
 
@@ -80,33 +99,86 @@ void insertAtPosition(Node*& tail, Node*& head, int position, int d) {
     nodeToInsert->prev = temp;
 }
 
+void deleteNode(int position, Node*& head) {
+    if (head == NULL) return; // Empty list check
+    
+    // Deleting first node
+    if (position == 1) {
+        Node* temp = head;
+        head = head->next;
+        if (head != NULL) {
+            head->prev = NULL;
+        }
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+
+    // Deleting middle or last node
+    Node* current = head;
+    int count = 1;
+    while (count < position && current != NULL) { // Fix off-by-one error
+        current = current->next;
+        count++;
+    }
+    
+    if (current == NULL) return; // Prevent accessing NULL
+
+    Node* previous = current->prev;
+    previous->next = current->next;
+    if (current->next != NULL) {
+        current->next->prev = previous;
+    }
+    current->next = NULL;
+    current->prev = NULL;
+    delete current;
+}
+
 int main() {
-    Node* node1 = new Node(10);
-    Node* head = node1;
-    Node* tail = node1;
+    Node* head = NULL;
+    Node* tail = NULL;
     print(head);
-    cout << getLength(head) << endl;
+    cout << "Length: " << getLength(head) << endl;
 
-    insertAtHead(head, 9);
+    insertAtHead(tail, head, 9);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
-    insertAtHead(head, 12);
+    insertAtHead(tail, head, 12);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
-    insertAtHead(head, 22);
+    insertAtHead(tail, head, 22);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
-    insertAtTail(tail, 56);
+    insertAtTail(tail, head, 56);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
-    insertAtTail(tail, 65);
+    insertAtTail(tail, head, 65);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
-    insertAtTail(tail, 88);
+    insertAtTail(tail, head, 88);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
-    insertAtPosition(tail, head, 8, 100);
+    insertAtPosition(tail, head, 7, 100);
     print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
+
+    deleteNode(6, head);
+    print(head);
+    cout<<"head :"<<head->data<<endl;
+    cout<<"tail :"<<tail->data<<endl;
 
     return 0;
 }
