@@ -103,13 +103,30 @@ void deleteNode(Node* &tail,int value){
         delete curr;
     }
 }
+
+bool isCircularList(Node*head){
+    
+    if(head==NULL){
+        return false;
+    }
+
+    Node*temp=head->next;
+    while(temp!=NULL && temp!=head){
+        temp=temp->next;
+
+    }
+    if(temp==head){
+        return true;
+    }
+    false;
+}
 int main() {
     Node* tail = NULL;
 
     //empty list mei insert krte hai
     insertnode(tail, 5, 9); // Fixed: First insertion should insert the same element
     print(tail);
-/*
+
     insertnode(tail, 9, 5);
     print(tail);
 
@@ -121,9 +138,15 @@ int main() {
     
     insertnode(tail, 9, 22);
     print(tail);
-*/
-    deleteNode(tail,9);
-    print(tail);
+
+    // deleteNode(tail,9);
+    // print(tail);
+
+    if(isCircularList){
+        cout<<"linked list is circular"<<endl;
+    }else{
+        cout<<"linked list is not circular"<<endl;
+    }
 
     return 0;
 }
