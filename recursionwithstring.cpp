@@ -1,5 +1,6 @@
 #include <iostream>
 <<<<<<< HEAD
+<<<<<<< HEAD
 using namespace std;
 
 // Function to reverse a string using recursion
@@ -71,6 +72,8 @@ int main() {
     return 0;
 }
 =======
+=======
+>>>>>>> 0db7eb1 (Added mergesort.cpp)
 
 using namespace std;
 
@@ -164,4 +167,7 @@ using namespace std;
 // }
 
 
+<<<<<<< HEAD
 >>>>>>> 0db7eb1f0df2a734cdffa8307616fdee86d7d2a1
+=======
+>>>>>>> 0db7eb1 (Added mergesort.cpp)
