@@ -11,7 +11,7 @@ class Solution {
           ans.push_back(nums[n-1]);
           int leader=nums[n-1];
     
-          for(int i=n-2;i>=0;i++){
+          for(int i=n-2;i>=0;i--){
             if(leader<nums[i]){
                 ans.push_back(nums[i]);
                 leader=nums[i];
