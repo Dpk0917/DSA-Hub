@@ -128,8 +128,3 @@ int main(){
     cout<<"max occured letter: "<<getmaxoccucharacter(s)<<endl;
     return 0;
 }
-
-
-
-
-
