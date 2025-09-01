@@ -82,6 +82,22 @@ void heapify(int arr[],int n,int i){
         heapify(arr,n,largest);
     }
 }
+
+void heapsort(int arr[], int n) {
+    
+    int size=n;
+
+    while(size>1){
+
+        // step1
+        swap(arr[size],arr[1]);
+        size--;
+
+        // step2
+        heapify(arr,size,1);
+    }
+}
+
 int main() {
     heap h;
     h.insert(10);
@@ -95,10 +111,14 @@ int main() {
     int arr[6]={-1,54,53,55,52,50};
     int n=6;
     
+    // heapcreation
     for(int i=n/2;i>0;i--){
         heapify(arr,n,i);
     }
 
+    // heap sort
+    heapsort(arr,n);
+    
     cout<<"Printing the array now "<<endl;
     for(int i=1;i<=n;i++){
         cout<<arr[i]<<" ";
