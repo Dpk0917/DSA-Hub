@@ -9,58 +9,40 @@
  * };
  */
 class Solution {
-private:
-    ListNode*Reverse(ListNode*head){
-        ListNode*curr=head;
-        ListNode*next=NULL;
-        ListNode*prev=NULL;
-
-        while(curr!=NULL){
-            next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=next;
-
-        }
-
-        return prev; 
-    }
-
-
 public:
-    int pairSum(ListNode* head) {
+    ListNode* deleteMiddle(ListNode* head) {
 
-        if(head==NULL){
-            return 0;
+        if(head==NULL || head->next==NULL){
+            return NULL;
         }
 
-        ListNode*curr=head;
-        int size=0;
+        // ListNode*fast=head;
+        // ListNode*slow=head;
+        // ListNode*prev=NULL;
 
-        while(curr!=NULL){
-            size++;
-            curr=curr->next;
+        // while(fast!=NULL && fast->next!=NULL){
+        //     prev=slow;
+        //     fast=fast->next->next;
+        //     slow=slow->next;
+        // }
 
-        }
+        // prev->next=slow->next;
 
-        ListNode*center=head;
+        // return head;
 
-        for(int i=0;i<size/2;i++){
-            center=center->next;
-        }
+      ListNode*tempo=head;
+      int size=0;
+      while(tempo!=NULL){
+        size++;
+        tempo=tempo->next;
+      }
+      ListNode*prev=head;
+      for(int i=0;i<size/2-1;i++){
+        prev=prev->next;
+      }
 
-        center=Reverse(center);
-
-        ListNode*first=head;
-        int maxi=0;
-
-        while(center!=NULL){
-            int sum=first->val+center->val;
-            maxi=max(sum,maxi);
-            first=first->next;
-            center=center->next;
-        }
-
-        return maxi;
+      prev->next=prev->next->next;
+      
+      return head;
     }
 };
