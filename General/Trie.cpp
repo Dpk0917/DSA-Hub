@@ -79,26 +79,26 @@ class Trie{
     }
 
 
-    void removeUtil(TrieNode* root, string word){
-    if(word.length() == 0)
-    {
-        root->isTerminal = false;
-        return;
-    }
+//     void removeUtil(TrieNode* root, string word){
+//     if(word.length() == 0)
+//     {
+//         root->isTerminal = false;
+//         return;
+//     }
 
-    int index = word[0] - 'A';
+//     int index = word[0] - 'A';
 
-    TrieNode* child = root->children[index];
+//     TrieNode* child = root->children[index];
 
-    removeUtil(child, word.substr(1));
+//     removeUtil(child, word.substr(1));
 
-    if(child->isTerminal == false &&
-       hasChildren(child) == false)
-    {
-        delete child;
-        root->children[index] = NULL;
-    }
-}
+//     if(child->isTerminal == false &&
+//        hasChildren(child) == false)
+//     {
+//         delete child;
+//         root->children[index] = NULL;
+//     }
+// }
 
 };
 
@@ -107,7 +107,11 @@ int main(){
     Trie *t=new Trie();
 
     t->insertWord("HELLO");
-    cout<<"Present or Not : "<<t->search("HELLO")<<endl;
+    t->insertWord("SATVIK");
+    t->insertWord("DEEPAK");
+    cout<<"Present or Not : "<<t->search("HELL")<<endl;
+    cout<<"Present or Not : "<<t->search("SATVIK")<<endl;
+    cout<<"Present or Not : "<<t->search("DEEPAK")<<endl;
 
 
 
